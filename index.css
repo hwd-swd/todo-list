@@ -87,7 +87,8 @@ header{
 }
 
 #form{
-    width:60%;
+    max-width: 800px;
+    width:80%;
     position:absolute;
     top:50%;
     left:50%;
@@ -147,5 +148,5 @@ textarea{
 #formBottom{
     display:flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: flex-end;
 }
