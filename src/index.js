@@ -12,6 +12,7 @@ let loadHomepage=function(){
     
     // this._todoList.displayProject('today');
     overlayDOM();
+    projectDOM();
     displayTasks('today');
     displayProjects();
     
@@ -32,12 +33,12 @@ let overlayDOM = function(){
 
 };
 
-let openOverlay= function(){
+let openOverlay = function(){
     const overlay = document.querySelector('#overlay');
     overlay.style.display = 'block';
 };
 
-let clearForm= function(){
+let clearForm = function(){
     document.querySelector('#title').value='';
     document.querySelector('#date').value='';
     document.querySelector('#priority').checked=false;
@@ -108,15 +109,49 @@ let displayTask=function(task){
 
 let clearTasks = function(){
     let todoListDOM = document.querySelector('.todoList');
-    todoListDOM.innerHTML=''
+    todoListDOM.innerHTML='';
+};
+
+let projectDOM = function(){
+    const addProjectButton = document.querySelector('.addProject');
+    addProjectButton.addEventListener('click', openProject);
+
+    const submitProjectButton = document.querySelector('#submitProject');
+    submitProjectButton.addEventListener('click', submitProject);
+
+    const closeProjectButton = document.querySelector('#cancelProject');
+    closeProjectButton.addEventListener('click', closeProject);
+};
+
+let submitProject = function(){
+    const projectTitle = document.querySelector('#projectTitle').value;
+    if(projectTitle!=''){
+        todoList.pushProject(projectTitle);
+        displayProjects();
+        closeProject();
+    }
+};
+
+let openProject = function(){
+    const addProjectForm = document.querySelector('.addProjectForm');
+    addProjectForm.style.display='flex';
+};
+
+let closeProject = function(){
+    const addProjectForm = document.querySelector('.addProjectForm');
+    document.querySelector('#projectTitle').value='';
+    addProjectForm.style.display='none';
 };
 
 let displayProjects=function(){
+    clearProjects();
     let customProjectsDOM = document.querySelector('.customProjects');
     todoList.projects.forEach(project=>customProjectsDOM.appendChild(displayProject(project)));
 };
 
+
 let displayProject = function(project){
+    
     let temp = document.createElement('h2');
     temp.setAttribute('class','project');
     temp.textContent= project.projectName;

@@ -33,4 +33,9 @@ export default class TodoList{
     projectIndex(project){
         return this._projects.findIndex(ele=> ele.projectName==project);
     }
+
+    pushProject(project){
+        this._projects.push(new Project(project));
+    }
+
 }
