@@ -13,6 +13,7 @@ let loadHomepage=function(){
     // this._todoList.displayProject('today');
     overlayDOM();
     displayTasks('today');
+    displayProjects();
     
 };
 
@@ -107,6 +108,26 @@ let displayTask=function(task){
 
 let clearTasks = function(){
     let todoListDOM = document.querySelector('.todoList');
+    todoListDOM.innerHTML=''
 };
+
+let displayProjects=function(){
+    let customProjectsDOM = document.querySelector('.customProjects');
+    todoList.projects.forEach(project=>customProjectsDOM.appendChild(displayProject(project)));
+};
+
+let displayProject = function(project){
+    let temp = document.createElement('h2');
+    temp.setAttribute('class','project');
+    temp.textContent= project.projectName;
+    return temp
+};
+
+let clearProjects = function(){
+    let customProjectsDOM = document.querySelector('.customProjects');
+    customProjectsDOM.innerHTML='';
+};
+
+
 
 loadHomepage()

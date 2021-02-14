@@ -29,13 +29,36 @@ header{
     min-height: calc(100vh - 4rem);
 }
 
-.projects{
+.projectsContainer{
     display:flex;
     flex-direction: column;
     min-width: 180px;
     width:20%;
     max-width: 300px;
     background-color: lightgray;
+    padding:1rem;
+}
+
+.projectsContainer h1{
+    margin:1rem;
+    font-size: 150%;
+    
+}
+
+.project,.addProject{
+    padding:.2rem;
+    user-select: none;
+    border-radius: 6px;
+}
+
+.project:hover,.addProject:hover{
+    background-color: darkgray;
+}
+
+.project:active,.addProject:active{
+    box-shadow: 0px 0px 1px 2px darkgray;
+    color:white;
+    background-color: gray;
 }
 
 .todoMain{
