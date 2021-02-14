@@ -49,6 +49,8 @@ export default class Task {
 
     getDate(){
         let [year,month,day] = this._date.split('-');
+        month = parseInt(month).toString();
+        day = parseInt(day).toString();
         return `${month}/${day}/${year}`
     }
 };

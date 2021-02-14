@@ -5,7 +5,7 @@ export default class TodoList{
     constructor(){
         this._projects=[];
         let today = new Project('today');
-        let t1 = new Task('t1','d1','date1','1priority',false);
+        let t1 = new Task('t1','d1','2010-02-09','1priority',false);
         today.addTask(t1);
         this._projects.push(today);
         this._projects.push(new Project('today2'));
