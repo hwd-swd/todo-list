@@ -61,6 +61,11 @@ header{
     background-color: gray;
 }
 
+.addProjectForm{
+    display:none;
+    flex-direction: column;
+}
+
 .todoMain{
     display:flex;
     flex-direction: column;
