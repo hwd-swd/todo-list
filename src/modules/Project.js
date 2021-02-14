@@ -15,15 +15,17 @@ export default class Project {
         return this._tasks
     }
 
-    static addTask(title,description,date,priority,done){
-        this._tasks.push(new Task(title,description,date,priority,done));
+    addTask(task){
+        this._tasks.push(task);
     }
 
-    static removeTask(index){
+    removeTask(index){
         this._task = [...this.task.slice(0,index),this.task.slice(index+1)];
     }
 
-
+    displayTasks(){
+        this._tasks.forEach(task=>console.log({task}))
+    }
 
 
 };

@@ -46,4 +46,9 @@ export default class Task {
     set done(newDone){
         this._done = newDone;
     }
+
+    getDate(){
+        let [year,month,day] = this._date.split('-');
+        return `${month}/${day}/${year}`
+    }
 };

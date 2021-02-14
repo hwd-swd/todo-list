@@ -1,6 +1,7 @@
 import Task from './modules/Task';
 import Display from './modules/Display';
 
-Display.loadHomepage();
+let load = new Display();
+load.loadHomepage();
 
 
