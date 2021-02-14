@@ -73,6 +73,24 @@ header{
     background-color: red;
 }
 
+.taskContainer{
+    display:flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.taskLeft{
+    display:flex;
+    flex-direction: row;
+    display:block;
+}
+
+.taskRight{
+    display:flex;
+    flex-direction: row;
+    display:block;
+}
+
 #overlay{
     position:fixed; 
     display:none;
