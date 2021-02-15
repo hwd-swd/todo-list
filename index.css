@@ -4,7 +4,8 @@
     font-size:100%;
     outline: 0;
     padding:0;
-    font-family: Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-weight: lighter;
+    font-family: sans-serif;
 }
 
 header{
@@ -45,10 +46,16 @@ header{
     
 }
 
+.active{
+    background-color: darkgray;
+    font-weight: 900;
+}
+
 .project,.addProject,.timeslot{
     padding:.2rem;
     user-select: none;
     border-radius: 6px;
+    margin:.2rem;
 }
 
 .project:hover,.addProject:hover,.timeslot:hover{
@@ -143,6 +150,7 @@ header{
     max-width: 210px;
     width:40%;
     justify-content: flex-end;
+    align-items: center;
 }
 
 .taskDelete{
