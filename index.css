@@ -98,25 +98,44 @@ header{
 }
 
 .todoList{
-    background-color: red;
+    
 }
 
 .taskContainer{
     display:flex;
     flex-direction: row;
     justify-content: space-between;
+    padding:.3rem;
+}
+
+.taskContainer:hover{
+    background-color: darkgray;
 }
 
 .taskLeft{
     display:flex;
     flex-direction: row;
-    display:block;
+    width:60%;
 }
 
 .taskRight{
     display:flex;
     flex-direction: row;
-    display:block;
+    max-width: 210px;
+    width:40%;
+    justify-content: flex-end;
+}
+
+.taskDelete{
+    color:rgba(0,0,0,0);
+}
+
+.taskDelete:hover{
+    color:rgba(0,0,0,1);
+}
+
+.date{
+    padding: 0rem 1rem;
 }
 
 #overlay{
