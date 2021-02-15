@@ -1,15 +1,19 @@
 import Task from './modules/Task';
-import Project from './modules/Project';
 import TodoList from './modules/todoList';
+
 
 let todoList = new TodoList();
 
 
 let loadHomepage=function(){
     
-    let task2 = new Task('t2','d1','1997-11-10','1priority',false);
+    let task2 = new Task('t2','d1',new Date(1997,11,10),true,false);
     todoList.pushTask(task2,'Inbox');
-    
+    let date1 = new Date(1997,11,10);
+    let date2 = '2021-11-10';
+    // alert(date1)
+    // alert(isBefore(date1,date2))
+
     // this._todoList.displayProject('today');
     overlayDOM();
     projectDOM();
@@ -75,7 +79,9 @@ let closeOverlay = function(){
 let submitTask=function(){
     const projectName = document.querySelector('#project').value;
     const title = document.querySelector('#title').value;
-    const date = document.querySelector('#date').value;
+    let oldDate = document.querySelector('#date').value;
+    let [year,month,day]=oldDate.split('-');
+    let date = new Date(parseInt(year),parseInt(month),parseInt(day));
     const priority = document.querySelector('#priority').checked;
     const description = document.querySelector('#description').value;
 
@@ -127,11 +133,14 @@ let displayTask=function(task){
     
     let oldCheck = document.createElement('input');
     oldCheck.setAttribute('type','checkbox');
-    oldCheck.setAttribute('value',task.title)
+    oldCheck.setAttribute('value',task.title);
+    if(task.complete==true){
+        oldCheck.setAttribute('checked',true);
+    }
     taskComplete.appendChild(oldCheck);
     taskComplete.addEventListener('click',toggleComplete);
     
-    
+    //task title
     let taskTitle = document.createElement('p');
     taskTitle.textContent = `${task.title}`;
     taskLeft.appendChild(taskTitle);
@@ -144,10 +153,18 @@ let displayTask=function(task){
     taskRight.setAttribute('class','taskRight');
     temp.appendChild(taskRight);
 
-    let taskPriority = document.createElement('p');
-    taskPriority.textContent = `${task.priority}`;
-    taskRight.appendChild(taskPriority);
+    //toggle for task priority
+    let priorityCheck = document.createElement('input');
+    priorityCheck.setAttribute('type','checkbox');
+    priorityCheck.setAttribute('value',task.title);
+    if(task.priority==true){
+        priorityCheck.setAttribute('checked',true);
+    }
+    taskRight.appendChild(priorityCheck);
+    priorityCheck.addEventListener('click',togglePriority);
 
+
+    //task date
     let taskDate = document.createElement('p');
     taskDate.setAttribute('class','date');
     taskDate.textContent=`${task.getDate()}`;
@@ -174,11 +191,19 @@ let deleteTask = function(e){
     displayTasks(projectTitle);
 };
 
-//completes the task
+//toggles task completion
 let toggleComplete = function(e){
     let taskTitle = e.target.getAttribute('value');
     let projectTitle = document.querySelector('.todoTitle').textContent;
     todoList.toggleTaskComplete(taskTitle,projectTitle);
+    displayTasks(projectTitle);
+};
+
+//toggles task priority  NEED TO EVENT LISTENER IT
+let togglePriority = function(e){
+    let taskTitle = e.target.getAttribute('value');
+    let projectTitle = document.querySelector('.todoTitle').textContent;
+    todoList.togglePriority(taskTitle,projectTitle);
     displayTasks(projectTitle);
 };
 

@@ -1,3 +1,5 @@
+import {format} from 'date-fns'
+
 export default class Task {
     constructor(title,description,date,priority,complete){
         this._title = title;
@@ -56,10 +58,21 @@ export default class Task {
         };
     }
 
+    togglePriority(){
+        if (this._priority==true){
+            this._priority=false;
+        }
+        else{
+            this._priority=true;
+        };
+    }
+
+    //removes the leading zeros and formats the date
     getDate(){
-        let [year,month,day] = this._date.split('-');
+        let [month,day,year] = format(this._date, 'MM/dd/yyyy').split('/');
         month = parseInt(month).toString();
         day = parseInt(day).toString();
+        year = parseInt(year).toString();
         return `${month}/${day}/${year}`
     }
 };

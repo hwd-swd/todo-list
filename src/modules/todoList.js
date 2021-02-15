@@ -5,7 +5,7 @@ export default class TodoList{
     constructor(){
         this._projects=[];
         let today = new Project('Inbox');
-        let t1 = new Task('t1','d1','2010-02-09','1priority',false);
+        let t1 = new Task('t1','d1',new Date(2017,1,5),false,false);
         today.addTask(t1);
         this._projects.push(today);
         this._projects.push(new Project('today2'));
@@ -45,6 +45,15 @@ export default class TodoList{
     toggleTaskComplete(taskTitle,projectName){
         if(this.hasProject(projectName)){
             return this._projects[this.projectIndex(projectName)].toggleCompleteTask(taskTitle);
+        }
+        else{
+            return false
+        }
+    }
+
+    togglePriority(taskTitle,projectName){
+        if(this.hasProject(projectName)){
+            return this._projects[this.projectIndex(projectName)].togglePriorityTask(taskTitle);
         }
         else{
             return false

@@ -1,4 +1,4 @@
-import Task from './Task';
+import {isBefore} from 'date-fns'
 
 export default class Project {
     constructor(projectName){
@@ -17,6 +17,7 @@ export default class Project {
 
     addTask(task){
         this._tasks.push(task);
+        this.sortProject();
     }
 
     hasTask(taskTitle){
@@ -43,9 +44,47 @@ export default class Project {
     toggleCompleteTask(taskTitle){
         if (this.hasTask(taskTitle)){
             this._tasks[this.taskIndex(taskTitle)].toggleComplete();
+            this.sortProject();
         }
         else{
             return false
         }
+    }
+
+    togglePriorityTask(taskTitle){
+        if (this.hasTask(taskTitle)){
+            this._tasks[this.taskIndex(taskTitle)].togglePriority();
+            this.sortProject();
+        }
+        else{
+            return false
+        }
+    }
+
+    sortProject(){
+        this._tasks.sort((a,b)=>
+        {if(a.complete==true&&b.complete==false){
+            return 1
+        }
+        else if(a.complete==false&&b.complete==true){
+            return -1
+        }
+        else{
+            if(a.priority==true&&b.priority==false){
+                return -1
+            }
+            else if(a.priority==false&&b.priority==true){
+                return 1
+            }
+            else{
+                if(isBefore(a.date,b.date)){
+                    return -1
+                }
+                else{
+                    return 1
+                }
+            }
+        }
+        });
     }
 };
