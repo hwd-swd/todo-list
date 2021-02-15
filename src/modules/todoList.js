@@ -30,12 +30,16 @@ export default class TodoList{
         this._projects[this.projectIndex(project)].addTask(task);
     }
 
-    projectIndex(project){
-        return this._projects.findIndex(ele=> ele.projectName==project);
+    projectIndex(newProjectName){
+        return this._projects.findIndex(ele=> ele.projectName==newProjectName);
     }
 
     pushProject(project){
         this._projects.push(new Project(project));
+    }
+
+    hasProject(newProjectName){
+        return this._projects.some(ele=>ele.projectName==newProjectName);
     }
 
 }

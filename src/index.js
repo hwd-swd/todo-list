@@ -15,6 +15,7 @@ let loadHomepage=function(){
     projectDOM();
     displayTasks('today');
     displayProjects();
+    projectSwapDOM();
     
 };
 
@@ -30,12 +31,25 @@ let overlayDOM = function(){
 
     const clearButton = document.querySelector('#clearForm');
     clearButton.addEventListener('click',clearForm)
+};
 
+let overlayProjects = function(){
+    const projectSelector = document.querySelector('#project');
+    projectSelector.innerHTML='';
+    
+    todoList.projects.forEach(project=>{
+        let option = document.createElement('option');
+        option.setAttribute('value',project.projectName);
+        option.textContent=project.projectName;
+        projectSelector.appendChild(option);
+    });
 };
 
 let openOverlay = function(){
     const overlay = document.querySelector('#overlay');
+    overlayProjects();
     overlay.style.display = 'block';
+    
 };
 
 let clearForm = function(){
@@ -45,12 +59,14 @@ let clearForm = function(){
     document.querySelector('#description').value='';
 };
 
-let closeOverlay=function(){
+let closeOverlay = function(){
+    clearForm();
     const overlay = document.querySelector('#overlay');
     overlay.style.display = 'none';
 };
 
 let submitTask=function(){
+    const projectName = document.querySelector('.todoTitle').textContent;
     const title = document.querySelector('#title').value;
     const date = document.querySelector('#date').value;
     const priority = document.querySelector('#priority').checked;
@@ -64,20 +80,27 @@ let submitTask=function(){
     }
     else{
         let task3 = new Task(title,description,date,priority,false);
-        todoList.pushTask(task3,'today');
-        displayTasks('today');
+        todoList.pushTask(task3,projectName);
+        displayTasks(projectName);
         closeOverlay();
+
+
+
+        alert(document.querySelector('#project').value)
     }
     
 
 };
 
 let displayTasks=function(project){
-    clearTasks();
-    let todoListDOM = document.querySelector('.todoList');
-    let index = todoList.projectIndex(project);
-    console.log(todoList)
-    todoList.projects[index].tasks.forEach(task=>todoListDOM.appendChild(displayTask(task)));
+    if(todoList.hasProject(project)){
+        clearTasks();
+        let header = document.querySelector('.todoTitle');
+        header.textContent=project;
+        let todoListDOM = document.querySelector('.todoList');
+        let index = todoList.projectIndex(project);
+        todoList.projects[index].tasks.forEach(task=>todoListDOM.appendChild(displayTask(task)));
+    };
 };
 
 let displayTask=function(task){
@@ -123,12 +146,19 @@ let projectDOM = function(){
     closeProjectButton.addEventListener('click', closeProject);
 };
 
+let projectSwapDOM = function(){
+    const projects = document.querySelectorAll('.project');
+    projects.forEach(project=>project.addEventListener('click',(e)=>displayTasks(e.target.textContent)));
+}
+
 let submitProject = function(){
     const projectTitle = document.querySelector('#projectTitle').value;
-    if(projectTitle!=''){
+    console.log(todoList.hasProject(projectTitle));
+    if(projectTitle!=''&&!todoList.hasProject(projectTitle)){
         todoList.pushProject(projectTitle);
         displayProjects();
         closeProject();
+        displayTasks(projectTitle);
     }
 };
 
@@ -147,6 +177,7 @@ let displayProjects=function(){
     clearProjects();
     let customProjectsDOM = document.querySelector('.customProjects');
     todoList.projects.forEach(project=>customProjectsDOM.appendChild(displayProject(project)));
+    projectSwapDOM();
 };
 
 
