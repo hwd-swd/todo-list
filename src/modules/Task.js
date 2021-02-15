@@ -1,10 +1,10 @@
 export default class Task {
-    constructor(title,description,date,priority,done){
+    constructor(title,description,date,priority,complete){
         this._title = title;
         this._description = description;
         this._date = date;
         this._priority = priority;
-        this._done = done;
+        this._complete = complete;
     }
 
     get title(){
@@ -39,12 +39,21 @@ export default class Task {
         this._priority = newPriority;
     }
 
-    get done(){
-        return this._done;
+    get complete(){
+        return this._complete;
     }
 
-    set done(newDone){
-        this._done = newDone;
+    set complete(newcomplete){
+        this._complete = newcomplete;
+    }
+
+    toggleComplete(){
+        if (this._complete==true){
+            this._complete=false;
+        }
+        else{
+            this._complete=true;
+        };
     }
 
     getDate(){

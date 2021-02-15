@@ -39,4 +39,13 @@ export default class Project {
     taskIndex(taskTitle){
         return this._tasks.findIndex(ele=>ele.title==taskTitle);
     }
+
+    toggleCompleteTask(taskTitle){
+        if (this.hasTask(taskTitle)){
+            this._tasks[this.taskIndex(taskTitle)].toggleComplete();
+        }
+        else{
+            return false
+        }
+    }
 };

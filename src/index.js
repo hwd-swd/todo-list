@@ -109,14 +109,36 @@ let displayTasks=function(project){
 let displayTask=function(task){
     let temp = document.createElement('div');
     temp.setAttribute('class','taskContainer');
+    if (task.complete){
+        temp.className+=' completed';
+    }
+
 
     let taskLeft = document.createElement('div');
     taskLeft.setAttribute('class','taskLeft')
     temp.appendChild(taskLeft);
+
+
+    //check box for task complete
+    let taskComplete = document.createElement('div');
+    taskComplete.setAttribute('class','checkBox');
+    taskLeft.appendChild(taskComplete);
+    taskComplete.setAttribute('value',task.title)
+    
+    let oldCheck = document.createElement('input');
+    oldCheck.setAttribute('type','checkbox');
+    oldCheck.setAttribute('value',task.title)
+    taskComplete.appendChild(oldCheck);
+    taskComplete.addEventListener('click',toggleComplete);
+    
     
     let taskTitle = document.createElement('p');
     taskTitle.textContent = `${task.title}`;
     taskLeft.appendChild(taskTitle);
+    if (task.complete){
+        taskTitle.className+=' completedText';
+    }
+
 
     let taskRight = document.createElement('div');
     taskRight.setAttribute('class','taskRight');
@@ -130,7 +152,10 @@ let displayTask=function(task){
     taskDate.setAttribute('class','date');
     taskDate.textContent=`${task.getDate()}`;
     taskRight.appendChild(taskDate);
-
+    if (task.complete){
+        taskDate.className+=' completedText';
+    }
+ 
     let taskDelete = document.createElement('p');
     taskDelete.setAttribute('class','taskDelete');
     taskDelete.textContent = 'X';
@@ -146,6 +171,14 @@ let deleteTask = function(e){
     let taskTitle = e.target.getAttribute('value');
     let projectTitle = document.querySelector('.todoTitle').textContent;
     todoList.deleteTask(taskTitle,projectTitle);
+    displayTasks(projectTitle);
+};
+
+//completes the task
+let toggleComplete = function(e){
+    let taskTitle = e.target.getAttribute('value');
+    let projectTitle = document.querySelector('.todoTitle').textContent;
+    todoList.toggleTaskComplete(taskTitle,projectTitle);
     displayTasks(projectTitle);
 };
 

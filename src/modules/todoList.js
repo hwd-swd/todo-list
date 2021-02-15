@@ -17,15 +17,6 @@ export default class TodoList{
         return this._projects;
     }
 
-    displayProjects(){
-        console.log(this._projects)
-    }    
-
-    displayProject(project){
-        let index = this.projectIndex(project);
-        this._projects[index].displayTasks();
-    }
-
     pushTask(task,project){
         this._projects[this.projectIndex(project)].addTask(task);
     }
@@ -51,4 +42,12 @@ export default class TodoList{
         }
     }
 
+    toggleTaskComplete(taskTitle,projectName){
+        if(this.hasProject(projectName)){
+            return this._projects[this.projectIndex(projectName)].toggleCompleteTask(taskTitle);
+        }
+        else{
+            return false
+        }
+    }
 }
