@@ -101,10 +101,29 @@ header{
     
 }
 
+.completed{
+    color: rgba(0,0,0,0.5);
+}
+
+.completedText{
+    text-decoration: line-through;
+}
+
+.checkBox{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
 .taskContainer{
     display:flex;
     flex-direction: row;
     justify-content: space-between;
+    padding:.3rem;
+}
+
+.taskContainer p{
     padding:.3rem;
 }
 
@@ -115,7 +134,7 @@ header{
 .taskLeft{
     display:flex;
     flex-direction: row;
-    width:60%;
+    margin-left:1rem;
 }
 
 .taskRight{
