@@ -19,13 +19,24 @@ export default class Project {
         this._tasks.push(task);
     }
 
+    hasTask(taskTitle){
+        return this._tasks.some(ele=>ele.title==taskTitle);
+    }
+
     removeTask(index){
-        this._task = [...this.task.slice(0,index),this.task.slice(index+1)];
+        this._tasks.splice(index,1);
     }
 
-    displayTasks(){
-        this._tasks.forEach(task=>console.log({task}))
+    deleteTask(taskTitle){
+        if (this.hasTask(taskTitle)){
+            this.removeTask(this.taskIndex(taskTitle));
+        }
+        else{
+            return false
+        }
     }
 
-
+    taskIndex(taskTitle){
+        return this._tasks.findIndex(ele=>ele.title==taskTitle);
+    }
 };

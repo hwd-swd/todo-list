@@ -4,7 +4,7 @@ import Task from './Task';
 export default class TodoList{
     constructor(){
         this._projects=[];
-        let today = new Project('today');
+        let today = new Project('Inbox');
         let t1 = new Task('t1','d1','2010-02-09','1priority',false);
         today.addTask(t1);
         this._projects.push(today);
@@ -40,6 +40,15 @@ export default class TodoList{
 
     hasProject(newProjectName){
         return this._projects.some(ele=>ele.projectName==newProjectName);
+    }
+
+    deleteTask(taskTitle,projectName){
+        if(this.hasProject(projectName)){
+            return this._projects[this.projectIndex(projectName)].deleteTask(taskTitle);
+        }
+        else{
+            return false
+        }
     }
 
 }
