@@ -45,17 +45,17 @@ header{
     
 }
 
-.project,.addProject{
+.project,.addProject,.timeslot{
     padding:.2rem;
     user-select: none;
     border-radius: 6px;
 }
 
-.project:hover,.addProject:hover{
+.project:hover,.addProject:hover,.timeslot:hover{
     background-color: darkgray;
 }
 
-.project:active,.addProject:active{
+.project:active,.addProject:active,.timeslot:active{
     box-shadow: 0px 0px 1px 2px darkgray;
     color:white;
     background-color: gray;

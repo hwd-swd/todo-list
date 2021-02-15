@@ -13,9 +13,8 @@
             <div class='main'>
                 <div class='projectsContainer'>
                     <div class="defaultProjects">
-                        <h2 class="project">Inbox</h2>
-                        <h2 class="project">Today</h2>
-                        <h2 class="project">This Week</h2>
+                        <h2 class="timeslot">Inbox</h2>
+                        <h2 class="timeslot">Today</h2>
                     </div>
                     <h1>Projects</h1>
                     <div class="customProjects">
@@ -64,10 +63,15 @@
         
                                         <label for="priority">Priority:</label>
                                         <input type="checkbox" id="priority" name="priority">
-    
-                                        <!-- <label for="project">Project:</label>
-                                        <input type="checkbox" id="project" name="project">
-                                        -->
+                                        
+                                        <label for="project">Project:</label>
+                                        <form class="projectSelector">
+                                            <select id="project" name="project">
+                                            <option value="Inbox">Inbox</option>
+                                            <option value="ca">Canada</option>
+                                            <option value="usa">USA</option>
+                                            </select>
+                                        </form>
                                     </div>
                                 </div>
                                                                
