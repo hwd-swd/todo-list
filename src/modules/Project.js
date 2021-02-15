@@ -61,6 +61,7 @@ export default class Project {
         }
     }
 
+    //sorts the project by completion, priority, and due date
     sortProject(){
         this._tasks.sort((a,b)=>
         {if(a.complete==true&&b.complete==false){

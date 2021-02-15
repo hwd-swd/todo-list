@@ -4,15 +4,11 @@ import TodoList from './modules/todoList';
 
 let todoList = new TodoList();
 
-
 let loadHomepage=function(){
     
     let task2 = new Task('t2','d1',new Date(1997,11,10),true,false);
     todoList.pushTask(task2,'Inbox');
-    let date1 = new Date(1997,11,10);
-    let date2 = '2021-11-10';
-    // alert(date1)
-    // alert(isBefore(date1,date2))
+
 
     // this._todoList.displayProject('today');
     overlayDOM();
@@ -34,7 +30,7 @@ let overlayDOM = function(){
     submitButton.addEventListener('click',submitTask);
 
     const clearButton = document.querySelector('#clearForm');
-    clearButton.addEventListener('click',clearForm)
+    clearButton.addEventListener('click',clearForm);
 };
 
 let overlayProjects = function(){
@@ -108,6 +104,16 @@ let displayTasks=function(project){
         let todoListDOM = document.querySelector('.todoList');
         let index = todoList.projectIndex(project);
         todoList.projects[index].tasks.forEach(task=>todoListDOM.appendChild(displayTask(task)));
+    
+        const projects = document.querySelectorAll('.project');
+        projects.forEach(ele=>{
+            if(ele.textContent==project){
+                ele.classList.add('active');
+            }
+            else{
+                ele.classList.remove('active');
+            };
+        });
     };
 };
 
@@ -173,6 +179,7 @@ let displayTask=function(task){
         taskDate.className+=' completedText';
     }
  
+    //task delete
     let taskDelete = document.createElement('p');
     taskDelete.setAttribute('class','taskDelete');
     taskDelete.textContent = 'X';
@@ -228,8 +235,11 @@ let projectDOM = function(){
 //adds dom elements to all of the projects
 let projectSwapDOM = function(){
     const projects = document.querySelectorAll('.project');
-    projects.forEach(project=>project.addEventListener('click',(e)=>displayTasks(e.target.textContent)));
-}
+    projects.forEach(project=>{
+        project.addEventListener('click',(e)=>displayTasks(e.target.textContent))
+    }
+    );
+};
 
 //adds a new project to the todo list
 let submitProject = function(){
