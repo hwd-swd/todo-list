@@ -84,7 +84,7 @@ let submitTask=function(){
     }
     else{
         let [year,month,day]=oldDate.split('-');
-        let date = new Date(parseInt(year),parseInt(month),parseInt(day));
+        let date = new Date(parseInt(year),parseInt(month)-1,parseInt(day));
         let task3 = new Task(title,description,date,priority,false);
         todoList.pushTask(task3,projectName);
         displayTasks(projectName);
