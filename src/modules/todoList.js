@@ -5,13 +5,13 @@ export default class TodoList{
     //initiates todolist with the default as inbox
     constructor(){
         this._projects=[];
-        let today = new Project('Inbox');
+        this.pushProject('Inbox');
         let t1 = new Task('t1','d1',new Date(2017,1,5),false,false);
-        today.addTask(t1);
-        this._projects.push(today);
-        this._projects.push(new Project('today2'));
-        this._projects.push(new Project('today3'));
-        this._projects.push(new Project('today4'));
+        // inbox.addTask(t1);
+        // this._projects.push(inbox);
+        // this._projects.push(new Project('today2'));
+        // this._projects.push(new Project('today3'));
+        // this._projects.push(new Project('today4'));
     }
 
     get projects(){
@@ -30,7 +30,7 @@ export default class TodoList{
 
     //adds a new project if it doesnt exist inside the todolist
     pushProject(project){
-        if (!this.hasProject){
+        if(!this.hasProject(project)){
             this._projects.push(new Project(project));
         }
         
@@ -41,7 +41,17 @@ export default class TodoList{
         return this._projects.some(ele=>ele.projectName==newProjectName);
     }
 
-    //removes a task from a project
+    //remove a task at a given index
+    removeTask(taskIndex,projectName){
+        if(this.hasProject(projectName)){
+            return this._projects[this.projectIndex(projectName)].removeTask(taskIndex);
+        }
+        else{
+            return false
+        }
+    }
+
+    //deletes a task from a project
     deleteTask(taskTitle,projectName){
         if(this.hasProject(projectName)){
             return this._projects[this.projectIndex(projectName)].deleteTask(taskTitle);
@@ -52,9 +62,9 @@ export default class TodoList{
     }
 
     // toggles a task completion
-    toggleTaskComplete(taskTitle,projectName){
+    toggleTaskComplete(taskIndex,projectName){
         if(this.hasProject(projectName)){
-            return this._projects[this.projectIndex(projectName)].toggleCompleteTask(taskTitle);
+            return this._projects[this.projectIndex(projectName)].toggleCompleteTask(taskIndex);
         }
         else{
             return false
@@ -62,9 +72,9 @@ export default class TodoList{
     }
 
     //toggles task priority
-    togglePriority(taskTitle,projectName){
+    togglePriority(taskIndex,projectName){
         if(this.hasProject(projectName)){
-            return this._projects[this.projectIndex(projectName)].togglePriorityTask(taskTitle);
+            return this._projects[this.projectIndex(projectName)].togglePriorityTask(taskIndex);
         }
         else{
             return false

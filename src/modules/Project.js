@@ -46,27 +46,30 @@ export default class Project {
         return this._tasks.findIndex(ele=>ele.title==taskTitle);
     }
 
-
     //toggles a task completion
-    toggleCompleteTask(taskTitle){
-        if (this.hasTask(taskTitle)){
-            this._tasks[this.taskIndex(taskTitle)].toggleComplete();
-            this.sortProject();
-        }
-        else{
-            return false
-        }
+    toggleCompleteTask(taskIndex){
+        // if (this.hasTask(taskIndex)){
+        //     this._tasks[this.taskIndex(taskIndex)].toggleComplete();
+        //     this.sortProject();
+        // }
+        // else{
+        //     return false
+        // }
+        this._tasks[taskIndex].toggleComplete();
+        this.sortProject();
     }
 
     //toggls a task priority
-    togglePriorityTask(taskTitle){
-        if (this.hasTask(taskTitle)){
-            this._tasks[this.taskIndex(taskTitle)].togglePriority();
-            this.sortProject();
-        }
-        else{
-            return false
-        }
+    togglePriorityTask(taskIndex){
+        // if (this.hasTask(taskTitle)){
+        //     this._tasks[this.taskIndex(taskTitle)].togglePriority();
+        //     this.sortProject();
+        // }
+        // else{
+        //     return false
+        // }
+        this._tasks[taskIndex].togglePriority();
+        this.sortProject();
     }
 
     //sorts the project by completion, priority, and due date

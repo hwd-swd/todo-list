@@ -2,29 +2,11 @@ import Task from './modules/Task';
 import TodoList from './modules/todoList';
 import {initiateStorage,updateStorage,clearStorage} from './modules/Storage'
 
-let todoList = initiateStorage();
+
 
 let loadHomepage=function(){
     let task2 = new Task('t2','d1',new Date(1997,11,10),true,false);
     todoList.pushTask(task2,'Inbox');
-
-    let bob = initiateStorage();
-    console.log(`local: ${bob}`);
-    console.table(bob);
-    bob.pushTask(task2,'Inbox');
-    console.table(bob);
-
-
-    console.log(`session: ${todoList}`)
-    console.table(todoList);
-
-
-
-
-
-
-
-
     overlayDOM();
     projectDOM();
     displayTasks('Inbox');
@@ -118,8 +100,17 @@ let displayTasks=function(project){
         header.textContent=project;
         let todoListDOM = document.querySelector('.todoList');
         let index = todoList.projectIndex(project);
-        todoList.projects[index].tasks.forEach(task=>todoListDOM.appendChild(displayTask(task)));
+
+
+        // todoList.projects[index].tasks.forEach(task=>
+        //     todoListDOM.appendChild(displayTask(task)));
     
+        for(let i=0;i<todoList.projects[index].tasks.length;i++){
+            let task = todoList.projects[index].tasks[i];
+            todoListDOM.appendChild(displayTask(task,i));
+        }
+
+        //displays the active project
         const projects = document.querySelectorAll('.project');
         projects.forEach(ele=>{
             if(ele.textContent==project){
@@ -135,7 +126,7 @@ let displayTasks=function(project){
 };
 
 //creates a new task to display
-let displayTask=function(task){
+let displayTask=function(task,i){
     let temp = document.createElement('div');
     temp.setAttribute('class','taskContainer');
     if (task.complete){
@@ -147,16 +138,18 @@ let displayTask=function(task){
     taskLeft.setAttribute('class','taskLeft')
     temp.appendChild(taskLeft);
 
-
     //check box for task complete
     let taskComplete = document.createElement('div');
     taskComplete.setAttribute('class','checkBox');
     taskLeft.appendChild(taskComplete);
-    taskComplete.setAttribute('value',task.title)
+    // taskComplete.setAttribute('value',task.title);
+    taskComplete.setAttribute('value',i);
     
     let oldCheck = document.createElement('input');
     oldCheck.setAttribute('type','checkbox');
-    oldCheck.setAttribute('value',task.title);
+    // oldCheck.setAttribute('value',task.title);
+    oldCheck.setAttribute('value',i);
+
     if(task.complete==true){
         oldCheck.setAttribute('checked',true);
     }
@@ -179,7 +172,9 @@ let displayTask=function(task){
     //toggle for task priority
     let priorityCheck = document.createElement('input');
     priorityCheck.setAttribute('type','checkbox');
-    priorityCheck.setAttribute('value',task.title);
+    // priorityCheck.setAttribute('value',task.title);
+    priorityCheck.setAttribute('value',i);
+
     if(task.priority==true){
         priorityCheck.setAttribute('checked',true);
     }
@@ -200,7 +195,9 @@ let displayTask=function(task){
     let taskDelete = document.createElement('p');
     taskDelete.setAttribute('class','taskDelete');
     taskDelete.textContent = 'X';
-    taskDelete.setAttribute('value',task.title)
+    // taskDelete.setAttribute('value',task.title);
+    taskDelete.setAttribute('value',i);
+    
     taskDelete.addEventListener('click',deleteTask);
     taskRight.appendChild(taskDelete);
 
@@ -209,25 +206,25 @@ let displayTask=function(task){
 
 //deletes the task
 let deleteTask = function(e){
-    let taskTitle = e.target.getAttribute('value');
+    let taskIndex = e.target.getAttribute('value');
     let projectTitle = document.querySelector('.todoTitle').textContent;
-    todoList.deleteTask(taskTitle,projectTitle);
+    todoList.removeTask(taskIndex,projectTitle);
     displayTasks(projectTitle);
 };
 
 //toggles task completion
 let toggleComplete = function(e){
-    let taskTitle = e.target.getAttribute('value');
+    let taskIndex = e.target.getAttribute('value');
     let projectTitle = document.querySelector('.todoTitle').textContent;
-    todoList.toggleTaskComplete(taskTitle,projectTitle);
+    todoList.toggleTaskComplete(taskIndex,projectTitle);
     displayTasks(projectTitle);
 };
 
 //toggles task priority  NEED TO EVENT LISTENER IT
 let togglePriority = function(e){
-    let taskTitle = e.target.getAttribute('value');
+    let taskIndex = e.target.getAttribute('value');
     let projectTitle = document.querySelector('.todoTitle').textContent;
-    todoList.togglePriority(taskTitle,projectTitle);
+    todoList.togglePriority(taskIndex,projectTitle);
     displayTasks(projectTitle);
 };
 
@@ -261,13 +258,12 @@ let projectSwapDOM = function(){
 //adds a new project to the todo list
 let submitProject = function(){
     const projectTitle = document.querySelector('#projectTitle').value;
-    console.log(todoList.hasProject(projectTitle));
     if(projectTitle!=''&&!todoList.hasProject(projectTitle)){
         todoList.pushProject(projectTitle);
         displayProjects();
         closeProject();
         displayTasks(projectTitle);
-    }
+    };
 };
 
 //opens the add project form
@@ -318,6 +314,6 @@ let clearProjects = function(){
     customProjectsDOM.innerHTML='';
 };
 
-
-
+// clearStorage();
+let todoList = initiateStorage();
 loadHomepage()

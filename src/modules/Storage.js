@@ -12,10 +12,7 @@ let initiateStorage = function(){
     }
     else{
         return getStorage();
-    }
-    // let todoList = new TodoList();
-    // localStorage.setItem('todoList',JSON.stringify(todoList));
-    // return getStorage();
+    };
 };
 
 // returns a todolist from the local storage
