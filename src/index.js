@@ -1,17 +1,19 @@
 import Task from './modules/Task';
 import TodoList from './modules/todoList';
-import {initiateStorage,getStorage,updateStorage} from './modules/Storage'
+import {initiateStorage,updateStorage,clearStorage} from './modules/Storage'
 
-let todoList = new TodoList();
+let todoList = initiateStorage();
 
 let loadHomepage=function(){
-    
     let task2 = new Task('t2','d1',new Date(1997,11,10),true,false);
     todoList.pushTask(task2,'Inbox');
 
     let bob = initiateStorage();
     console.log(`local: ${bob}`);
     console.table(bob);
+    bob.pushTask(task2,'Inbox');
+    console.table(bob);
+
 
     console.log(`session: ${todoList}`)
     console.table(todoList);
@@ -88,18 +90,19 @@ let submitTask=function(){
     const projectName = document.querySelector('#project').value;
     const title = document.querySelector('#title').value;
     let oldDate = document.querySelector('#date').value;
-    let [year,month,day]=oldDate.split('-');
-    let date = new Date(parseInt(year),parseInt(month),parseInt(day));
+    
     const priority = document.querySelector('#priority').checked;
     const description = document.querySelector('#description').value;
 
     if (title==''){
         alert('Please fill out a title');
     }
-    else if (date==''){
+    else if (oldDate==''){
         alert('Please fill out a date')
     }
     else{
+        let [year,month,day]=oldDate.split('-');
+        let date = new Date(parseInt(year),parseInt(month),parseInt(day));
         let task3 = new Task(title,description,date,priority,false);
         todoList.pushTask(task3,projectName);
         displayTasks(projectName);
@@ -126,6 +129,8 @@ let displayTasks=function(project){
                 ele.classList.remove('active');
             };
         });
+
+        updateStorage(todoList);
     };
 };
 
