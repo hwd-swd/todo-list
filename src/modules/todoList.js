@@ -2,6 +2,7 @@ import Project from './Project';
 import Task from './Task';
 
 export default class TodoList{
+    //initiates todolist with the default as inbox
     constructor(){
         this._projects=[];
         let today = new Project('Inbox');
@@ -17,22 +18,30 @@ export default class TodoList{
         return this._projects;
     }
 
+    //adds a new task to a project
     pushTask(task,project){
         this._projects[this.projectIndex(project)].addTask(task);
     }
 
+    //return the index of the project in the todolist
     projectIndex(newProjectName){
         return this._projects.findIndex(ele=> ele.projectName==newProjectName);
     }
 
+    //adds a new project if it doesnt exist inside the todolist
     pushProject(project){
-        this._projects.push(new Project(project));
+        if (!this.hasProject){
+            this._projects.push(new Project(project));
+        }
+        
     }
 
+    //checks if the project already exists in the todolist
     hasProject(newProjectName){
         return this._projects.some(ele=>ele.projectName==newProjectName);
     }
 
+    //removes a task from a project
     deleteTask(taskTitle,projectName){
         if(this.hasProject(projectName)){
             return this._projects[this.projectIndex(projectName)].deleteTask(taskTitle);
@@ -42,6 +51,7 @@ export default class TodoList{
         }
     }
 
+    // toggles a task completion
     toggleTaskComplete(taskTitle,projectName){
         if(this.hasProject(projectName)){
             return this._projects[this.projectIndex(projectName)].toggleCompleteTask(taskTitle);
@@ -51,6 +61,7 @@ export default class TodoList{
         }
     }
 
+    //toggles task priority
     togglePriority(taskTitle,projectName){
         if(this.hasProject(projectName)){
             return this._projects[this.projectIndex(projectName)].togglePriorityTask(taskTitle);

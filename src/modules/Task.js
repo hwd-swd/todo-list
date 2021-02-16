@@ -49,6 +49,7 @@ export default class Task {
         this._complete = newcomplete;
     }
 
+    //toggles task completion
     toggleComplete(){
         if (this._complete==true){
             this._complete=false;
@@ -58,6 +59,7 @@ export default class Task {
         };
     }
 
+    //toggles task priority
     togglePriority(){
         if (this._priority==true){
             this._priority=false;
@@ -67,7 +69,7 @@ export default class Task {
         };
     }
 
-    //removes the leading zeros and formats the date
+    //removes the leading zeros and returns the formmated date
     getDate(){
         let [month,day,year] = format(this._date, 'MM/dd/yyyy').split('/');
         month = parseInt(month).toString();

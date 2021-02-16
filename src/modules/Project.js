@@ -15,19 +15,23 @@ export default class Project {
         return this._tasks
     }
 
+    //adds a task to the project and then sorts it
     addTask(task){
         this._tasks.push(task);
         this.sortProject();
     }
 
+    //returns a boolean if the task exists in the project
     hasTask(taskTitle){
         return this._tasks.some(ele=>ele.title==taskTitle);
     }
 
+    //removes a task from the project
     removeTask(index){
         this._tasks.splice(index,1);
     }
 
+    //deletes a task from the project
     deleteTask(taskTitle){
         if (this.hasTask(taskTitle)){
             this.removeTask(this.taskIndex(taskTitle));
@@ -37,10 +41,13 @@ export default class Project {
         }
     }
 
+    //returns the index of a given task title
     taskIndex(taskTitle){
         return this._tasks.findIndex(ele=>ele.title==taskTitle);
     }
 
+
+    //toggles a task completion
     toggleCompleteTask(taskTitle){
         if (this.hasTask(taskTitle)){
             this._tasks[this.taskIndex(taskTitle)].toggleComplete();
@@ -51,6 +58,7 @@ export default class Project {
         }
     }
 
+    //toggls a task priority
     togglePriorityTask(taskTitle){
         if (this.hasTask(taskTitle)){
             this._tasks[this.taskIndex(taskTitle)].togglePriority();
@@ -87,5 +95,5 @@ export default class Project {
             }
         }
         });
-    }
+    };
 };

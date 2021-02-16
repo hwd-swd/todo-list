@@ -1,6 +1,6 @@
 import Task from './modules/Task';
 import TodoList from './modules/todoList';
-
+import {initiateStorage,getStorage,updateStorage} from './modules/Storage'
 
 let todoList = new TodoList();
 
@@ -9,8 +9,20 @@ let loadHomepage=function(){
     let task2 = new Task('t2','d1',new Date(1997,11,10),true,false);
     todoList.pushTask(task2,'Inbox');
 
+    let bob = initiateStorage();
+    console.log(`local: ${bob}`);
+    console.table(bob);
 
-    // this._todoList.displayProject('today');
+    console.log(`session: ${todoList}`)
+    console.table(todoList);
+
+
+
+
+
+
+
+
     overlayDOM();
     projectDOM();
     displayTasks('Inbox');
