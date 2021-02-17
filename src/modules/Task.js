@@ -77,4 +77,8 @@ export default class Task {
         year = parseInt(year).toString();
         return `${month}/${day}/${year}`
     }
+
+    getDateNormal(){
+        return format(this._date, 'yyyy-MM-dd')
+    }
 };

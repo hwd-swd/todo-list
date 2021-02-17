@@ -26,6 +26,10 @@ export default class Project {
         return this._tasks.some(ele=>ele.title==taskTitle);
     }
 
+    returnTask(index){
+        return this._tasks[index]
+    }
+
     //removes a task from the project
     removeTask(index){
         this._tasks.splice(index,1);

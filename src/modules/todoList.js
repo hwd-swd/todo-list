@@ -41,6 +41,10 @@ export default class TodoList{
         return this._projects.some(ele=>ele.projectName==newProjectName);
     }
 
+    getTask(index,projectName){
+        return this._projects[this.projectIndex(projectName)].returnTask(index);
+    }
+
     //remove a task at a given index
     removeTask(taskIndex,projectName){
         if(this.hasProject(projectName)){

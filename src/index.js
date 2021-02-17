@@ -5,8 +5,6 @@ import {isToday} from 'date-fns'
 
 
 let loadHomepage=function(){
-    let task2 = new Task('t2','d1',new Date(1997,11,10),true,false);
-    todoList.pushTask(task2,'Inbox');
     overlayDOM();
     projectDOM();
     displayTasks('Inbox');
@@ -89,17 +87,19 @@ let submitTask=function(){
         let date = new Date(parseInt(year),parseInt(month)-1,parseInt(day));
         let task3 = new Task(title,description,date,priority,false);
         todoList.pushTask(task3,projectName);
+
         displayTasks(projectName);
+
         closeOverlay();
     };
 };
 
 //displays all the tasks in the specified project
 let displayTasks=function(project){
-    if (project=='Today'||document.querySelector('.todoTitle').textContent=='Today'){  //if "today is selected"
+    if (project=='Today'){  //if "today is selected"
         clearTasks();
         let header = document.querySelector('.todoTitle');
-        header.textContent=project;
+        header.textContent='Today';
         let todoListDOM = document.querySelector('.todoList');
         
         todoList.projects.forEach(project=>{
@@ -198,6 +198,16 @@ let displayTask=function(task,project,i){
     taskRight.setAttribute('class','taskRight');
     temp.appendChild(taskRight);
 
+    //edit button for task
+    let editButton = document.createElement('button');
+    editButton.setAttribute('type','button');
+    editButton.setAttribute('value',i);
+    editButton.setAttribute('project',project);
+    editButton.textContent='EDIT';
+    editButton.addEventListener('click',openEdit);
+    taskRight.appendChild(editButton);
+
+
     //toggle for task priority
     let priorityCheck = document.createElement('input');
     priorityCheck.setAttribute('type','checkbox');
@@ -231,6 +241,29 @@ let displayTask=function(task,project,i){
     taskRight.appendChild(taskDelete);
 
     return temp
+};
+
+//edit button
+let openEdit = function(e){
+    const overlay = document.querySelector('#overlay');
+    overlayProjects();
+
+    let taskIndex = e.target.getAttribute('value');
+    let projectTitle = e.target.getAttribute('project');
+    
+    const task = todoList.getTask(taskIndex,projectTitle);
+
+    overlay.style.display = 'block';
+    document.querySelector('#project').value=projectTitle;
+    document.querySelector('#title').value=task.title;
+    document.querySelector('#date').value=task.getDateNormal();
+    
+
+    if (task.priority){
+        document.querySelector('#priority').checked=true;
+    }
+    document.querySelector('#description').value=task.description;
+    todoList.removeTask(taskIndex,projectTitle);
 };
 
 //deletes the task
