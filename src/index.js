@@ -100,14 +100,10 @@ let displayTasks=function(project){
         header.textContent=project;
         let todoListDOM = document.querySelector('.todoList');
         let index = todoList.projectIndex(project);
-
-
-        // todoList.projects[index].tasks.forEach(task=>
-        //     todoListDOM.appendChild(displayTask(task)));
     
         for(let i=0;i<todoList.projects[index].tasks.length;i++){
             let task = todoList.projects[index].tasks[i];
-            todoListDOM.appendChild(displayTask(task,i));
+            todoListDOM.appendChild(displayTask(task,project,i));
         }
 
         //displays the active project
@@ -126,12 +122,13 @@ let displayTasks=function(project){
 };
 
 //creates a new task to display
-let displayTask=function(task,i){
+let displayTask=function(task,project,i){
+
     let temp = document.createElement('div');
     temp.setAttribute('class','taskContainer');
     if (task.complete){
         temp.className+=' completed';
-    }
+    };
 
 
     let taskLeft = document.createElement('div');
@@ -142,13 +139,12 @@ let displayTask=function(task,i){
     let taskComplete = document.createElement('div');
     taskComplete.setAttribute('class','checkBox');
     taskLeft.appendChild(taskComplete);
-    // taskComplete.setAttribute('value',task.title);
     taskComplete.setAttribute('value',i);
     
     let oldCheck = document.createElement('input');
     oldCheck.setAttribute('type','checkbox');
-    // oldCheck.setAttribute('value',task.title);
     oldCheck.setAttribute('value',i);
+    oldCheck.setAttribute('project',project);
 
     if(task.complete==true){
         oldCheck.setAttribute('checked',true);
@@ -172,8 +168,8 @@ let displayTask=function(task,i){
     //toggle for task priority
     let priorityCheck = document.createElement('input');
     priorityCheck.setAttribute('type','checkbox');
-    // priorityCheck.setAttribute('value',task.title);
     priorityCheck.setAttribute('value',i);
+    priorityCheck.setAttribute('project',project);
 
     if(task.priority==true){
         priorityCheck.setAttribute('checked',true);
@@ -195,8 +191,8 @@ let displayTask=function(task,i){
     let taskDelete = document.createElement('p');
     taskDelete.setAttribute('class','taskDelete');
     taskDelete.textContent = 'X';
-    // taskDelete.setAttribute('value',task.title);
     taskDelete.setAttribute('value',i);
+    taskDelete.setAttribute('project',project);
     
     taskDelete.addEventListener('click',deleteTask);
     taskRight.appendChild(taskDelete);
@@ -207,7 +203,7 @@ let displayTask=function(task,i){
 //deletes the task
 let deleteTask = function(e){
     let taskIndex = e.target.getAttribute('value');
-    let projectTitle = document.querySelector('.todoTitle').textContent;
+    let projectTitle = e.target.getAttribute('project');
     todoList.removeTask(taskIndex,projectTitle);
     displayTasks(projectTitle);
 };
@@ -215,7 +211,7 @@ let deleteTask = function(e){
 //toggles task completion
 let toggleComplete = function(e){
     let taskIndex = e.target.getAttribute('value');
-    let projectTitle = document.querySelector('.todoTitle').textContent;
+    let projectTitle = e.target.getAttribute('project');
     todoList.toggleTaskComplete(taskIndex,projectTitle);
     displayTasks(projectTitle);
 };
@@ -223,7 +219,7 @@ let toggleComplete = function(e){
 //toggles task priority  NEED TO EVENT LISTENER IT
 let togglePriority = function(e){
     let taskIndex = e.target.getAttribute('value');
-    let projectTitle = document.querySelector('.todoTitle').textContent;
+    let projectTitle = e.target.getAttribute('project');
     todoList.togglePriority(taskIndex,projectTitle);
     displayTasks(projectTitle);
 };
