@@ -1,7 +1,7 @@
 import Task from './modules/Task';
 import TodoList from './modules/todoList';
 import {initiateStorage,updateStorage,clearStorage} from './modules/Storage'
-
+import {isToday} from 'date-fns'
 
 
 let loadHomepage=function(){
@@ -15,6 +15,7 @@ let loadHomepage=function(){
     
 };
 
+// DOM for the submit task overlay
 let overlayDOM = function(){
     const addTaskButton = document.querySelector('.addTask');
     addTaskButton.addEventListener('click', openOverlay);
@@ -29,6 +30,7 @@ let overlayDOM = function(){
     clearButton.addEventListener('click',clearForm);
 };
 
+//overlay to add new projects
 let overlayProjects = function(){
     const projectSelector = document.querySelector('#project');
     projectSelector.innerHTML='';
@@ -94,7 +96,38 @@ let submitTask=function(){
 
 //displays all the tasks in the specified project
 let displayTasks=function(project){
-    if(todoList.hasProject(project)){
+    if (project=='Today'||document.querySelector('.todoTitle').textContent=='Today'){  //if "today is selected"
+        clearTasks();
+        let header = document.querySelector('.todoTitle');
+        header.textContent=project;
+        let todoListDOM = document.querySelector('.todoList');
+        
+        todoList.projects.forEach(project=>{
+            for(let i=0;i<project.tasks.length;i++){
+                let task = project.tasks[i];
+                if(isToday(task.date)){
+                    todoListDOM.appendChild(displayTask(task,project.projectName,i));
+            
+                }
+                
+            };
+        });
+    
+        
+
+        //displays the active project
+        const projects = document.querySelectorAll('.project');
+        projects.forEach(ele=>{
+            if(ele.textContent==project){
+                ele.classList.add('active');
+            }
+            else{
+                ele.classList.remove('active');
+            };
+        });
+
+        updateStorage(todoList);
+    }else if(todoList.hasProject(project)){
         clearTasks();
         let header = document.querySelector('.todoTitle');
         header.textContent=project;
@@ -216,7 +249,7 @@ let toggleComplete = function(e){
     displayTasks(projectTitle);
 };
 
-//toggles task priority  NEED TO EVENT LISTENER IT
+//toggles task priority
 let togglePriority = function(e){
     let taskIndex = e.target.getAttribute('value');
     let projectTitle = e.target.getAttribute('project');
