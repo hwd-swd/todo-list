@@ -1,7 +1,7 @@
 import Task from './modules/Task';
 import {initiateStorage,updateStorage} from './modules/Storage'
 import {isToday} from 'date-fns'
-
+import {menuDOM} from './modules/navBar'
 
 let loadHomepage=function(){
     overlayDOM();
@@ -9,6 +9,7 @@ let loadHomepage=function(){
     displayTasks('Inbox');
     displayProjects();
     projectSwapDOM();
+    menuDOM();
     
 };
 
