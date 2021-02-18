@@ -1,6 +1,5 @@
 import Task from './modules/Task';
-import TodoList from './modules/todoList';
-import {initiateStorage,updateStorage,clearStorage} from './modules/Storage'
+import {initiateStorage,updateStorage} from './modules/Storage'
 import {isToday} from 'date-fns'
 
 
@@ -96,6 +95,7 @@ let submitTask=function(){
 
 //displays all the tasks in the specified project
 let displayTasks=function(project){
+    closeProject();
     if (project=='Today'){  //if "today is selected"
         clearTasks();
         let header = document.querySelector('.todoTitle');
@@ -156,17 +156,24 @@ let displayTasks=function(project){
 
 //creates a new task to display
 let displayTask=function(task,project,i){
+    let main = document.createElement('div');
 
     let temp = document.createElement('div');
     temp.setAttribute('class','taskContainer');
     if (task.complete){
         temp.className+=' completed';
     };
+    main.appendChild(temp);
 
 
     let taskLeft = document.createElement('div');
-    taskLeft.setAttribute('class','taskLeft')
+    taskLeft.setAttribute('class','taskLeft');
+    taskLeft.setAttribute('value',i);
+    taskLeft.setAttribute('project',project);
     temp.appendChild(taskLeft);
+    main.appendChild(displayDetails(task,project,i));
+    taskLeft.addEventListener('click',toggleDetails);
+
 
     //check box for task complete
     let taskComplete = document.createElement('div');
@@ -240,7 +247,41 @@ let displayTask=function(task,project,i){
     taskDelete.addEventListener('click',deleteTask);
     taskRight.appendChild(taskDelete);
 
-    return temp
+    return main
+};
+
+//details button
+let toggleDetails = function(e){
+    let taskIndex = e.target.getAttribute('value');
+    let projectTitle = e.target.getAttribute('project');
+    let detail = document.getElementById(`${projectTitle}-${taskIndex}`);
+    detail.classList.toggle('hide');
+};
+
+//details DOM
+let displayDetails = function(task,project,i){
+    let details = document.createElement('div');
+    details.classList.add('details');
+    details.classList.add('hide');
+    details.setAttribute('id',`${project}-${i}`);
+
+    let title = document.createElement('p');
+    title.innerHTML=`<strong>Title:</strong> ${task.title}`;
+    details.appendChild(title);
+
+    let description = document.createElement('p');
+    description.innerHTML=`<strong>Description:</strong> ${task.description}`;
+    details.appendChild(description);
+
+    let date = document.createElement('p');
+    date.innerHTML=`<strong>Due Date:</strong> ${task.getDate()}`;
+    details.appendChild(date);
+
+    let priority = document.createElement('p');
+    priority.innerHTML=`<strong>Priority:</strong> ${task.priority}`;
+    details.appendChild(priority);
+
+    return details
 };
 
 //edit button
