@@ -270,24 +270,27 @@ let openEdit = function(e){
 let deleteTask = function(e){
     let taskIndex = e.target.getAttribute('value');
     let projectTitle = e.target.getAttribute('project');
+    const projectName = document.querySelector('.todoTitle').textContent;
     todoList.removeTask(taskIndex,projectTitle);
-    displayTasks(projectTitle);
+    displayTasks(projectName);
 };
 
 //toggles task completion
 let toggleComplete = function(e){
     let taskIndex = e.target.getAttribute('value');
     let projectTitle = e.target.getAttribute('project');
+    const projectName = document.querySelector('.todoTitle').textContent;
     todoList.toggleTaskComplete(taskIndex,projectTitle);
-    displayTasks(projectTitle);
+    displayTasks(projectName);
 };
 
 //toggles task priority
 let togglePriority = function(e){
     let taskIndex = e.target.getAttribute('value');
     let projectTitle = e.target.getAttribute('project');
+    const projectName = document.querySelector('.todoTitle').textContent;
     todoList.togglePriority(taskIndex,projectTitle);
-    displayTasks(projectTitle);
+    displayTasks(projectName);
 };
 
 //clears the tasks
@@ -363,10 +366,34 @@ let displayProjects=function(){
 //displays one project
 let displayProject = function(project){
     
-    let temp = document.createElement('h2');
+    let temp = document.createElement('div');
     temp.setAttribute('class','project');
-    temp.textContent= project.projectName;
+
+    let header = document.createElement('h2');
+    header.textContent= project.projectName;
+    temp.appendChild(header);
+
+    let projectButton = document.createElement('p');
+    projectButton.textContent='X';
+    projectButton.setAttribute('project',project.projectName);
+    projectButton.classList.add('taskDelete');
+    projectButton.addEventListener('click',deleteProject);
+    temp.appendChild(projectButton);
     return temp
+};
+
+//deletes a project
+let deleteProject = function(e){
+    let projectTitle = e.target.getAttribute('project');
+    const projectName = document.querySelector('.todoTitle').textContent;
+    todoList.deleteProject(projectTitle);
+    if(projectTitle == projectName){
+        displayTasks('Inbox');
+    }
+    else{
+        displayTasks(projectName);
+    };
+    displayProjects();
 };
 
 

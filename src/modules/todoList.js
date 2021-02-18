@@ -84,4 +84,13 @@ export default class TodoList{
             return false
         }
     }
+
+    //deletes a project
+    deleteProject(projectName){
+        if(this.hasProject(projectName)){
+            alert('h')
+            this._projects.splice(this.projectIndex(projectName),1);
+        }
+        
+    }
 }

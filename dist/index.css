@@ -51,18 +51,24 @@ header{
     font-weight: 900;
 }
 
-.project,.addProject,.timeslot{
+.project,.addProject{
+    display: flex;
+    justify-content: space-between;
     padding:.2rem;
     user-select: none;
     border-radius: 6px;
     margin:.2rem;
 }
 
-.project:hover,.addProject:hover,.timeslot:hover{
+.project h2{
+    width:90%;
+}
+
+.project:hover,.addProject:hover{
     background-color: darkgray;
 }
 
-.project:active,.addProject:active,.timeslot:active{
+.project:active,.addProject:active{
     box-shadow: 0px 0px 1px 2px darkgray;
     color:white;
     background-color: gray;
