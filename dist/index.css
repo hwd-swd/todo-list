@@ -188,6 +188,10 @@ header{
     display:none;
 }
 
+.wide{
+    width:100%;
+}
+
 .date{
     padding: 0rem 1rem;
     width:40%;

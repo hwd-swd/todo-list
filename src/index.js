@@ -168,11 +168,10 @@ let displayTask=function(task,project,i){
 
     let taskLeft = document.createElement('div');
     taskLeft.setAttribute('class','taskLeft');
-    taskLeft.setAttribute('value',i);
-    taskLeft.setAttribute('project',project);
+    
     temp.appendChild(taskLeft);
     main.appendChild(displayDetails(task,project,i));
-    taskLeft.addEventListener('click',toggleDetails);
+    
 
 
     //check box for task complete
@@ -195,10 +194,14 @@ let displayTask=function(task,project,i){
     //task title
     let taskTitle = document.createElement('p');
     taskTitle.textContent = `${task.title}`;
+    taskTitle.classList.add('wide');
     taskLeft.appendChild(taskTitle);
     if (task.complete){
         taskTitle.className+=' completedText';
     }
+    taskTitle.setAttribute('value',i);
+    taskTitle.setAttribute('project',project);
+    taskTitle.addEventListener('click',toggleDetails);
 
 
     let taskRight = document.createElement('div');
