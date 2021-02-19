@@ -259,7 +259,14 @@ let toggleDetails = function(e){
     let taskIndex = e.target.getAttribute('value');
     let projectTitle = e.target.getAttribute('project');
     let detail = document.getElementById(`${projectTitle}-${taskIndex}`);
-    detail.classList.toggle('hide');
+    // detail.classList.toggle('hide');
+    if(detail.style.height=='50px'){
+        detail.style.height='0px';
+        detail.style.padding='0px';
+    }else{
+        detail.style.height='50px';
+        detail.style.padding='.5rem';
+    }
 };
 
 //details DOM

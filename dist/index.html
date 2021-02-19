@@ -4,24 +4,25 @@
         <meta charset="UTF-8">
         <title>To Do List</title>
         <link rel="stylesheet" href="index.css">
+        <script src="https://kit.fontawesome.com/c99ef28fdf.js" crossorigin="anonymous"></script>
     </head>
     <body>
         <div id="content">
             <header class="header">
-                <button type="button" id="menuButton"">Menu</button>
+                <div id="menuButton""><i class="fas fa-bars"></i></div>
                 <h1 class="title">Todo List</h1>
             </header>
             <div class='main'>
                 <div class='projectsContainer'>
                     <div class="defaultProjects">
-                        <h2 class="project">Inbox</h2>
-                        <h2 class="project">Today</h2>
+                        <h2 class="project"><i class="fas fa-inbox"></i>Inbox</h2>
+                        <h2 class="project"><i class="fas fa-calendar-day"></i>Today</h2>
                     </div>
-                    <h1>Projects</h1>
+                    <h1><i class="fas fa-tasks"></i>Projects</h1>
                     <div class="customProjects">
                         
                     </div>
-                    <h2 class="addProject">Add Project</h2>
+                    <h2 class="addProject"><i class="fas fa-plus"></i>Add Project</h2>
                     <form class="addProjectForm">
                         <input type="text" id="projectTitle" name="projectTitle" placeholder="Enter project title" required>
                         <div class="row">
@@ -36,7 +37,6 @@
                         <h2 class='todoTitle'>Inbox</h1>
                         <div class='addTask'>
                             <h3>+</h3>
-                            <h4>Add Task</h4>
                         </div>
                     </div>
                     
@@ -48,21 +48,23 @@
                             <div id="formTop"><h2>Add a Task:</h2><button type="button" id="close">X</button></div>
                             <hr class="line">
                             <form id="formContainer">
-                                <div class="row">
+                                <div class="input">
                                     <div class="col">
                                         <label for="title">Title:</label>
                                         <input type="text" id="title" name="title" placeholder="Enter title" required>
-                                        
-                                        <br>
+                                    </div>
+                                    <div class="dateInput col">
+                                        <label for="date">Date:</label>
+                                        <input type="date" id="date" name="dueDate" required>
+                                    </div>
+                                    <div class="descriptionInput col">
                                         <label for="description">Description:</label>
                                         <textarea id="description" name="description" placeholder="Optional"></textarea>
                                         
                                     </div>
                                     
-                                    <div class="col">
-                                        <label for="date">Date:</label>
-                                        <input type="date" id="date" name="dueDate" required>
-        
+                                    
+                                    <div class="priorityInput col">
                                         <label for="priority">Priority:</label>
                                         <input type="checkbox" id="priority" name="priority">
                                         
@@ -78,8 +80,8 @@
                                 </div>
                                                                
                                 <div id="formBottom">
-                                    <button type="button" id="clearForm">Clear</button>
-                                    <button type="button" id="submit">Submit</button>
+                                    <button type="button" class='formButton' id="clearForm">Clear</button>
+                                    <button type="button" class='formButton' id="submit">Submit</button>
                                 </div>
                                 
                                

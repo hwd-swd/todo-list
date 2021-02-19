@@ -24,6 +24,13 @@ header{
     margin:1rem;
 }
 
+#menuButton{
+    font-size: 200%;
+    margin-left:1rem;
+    border: 1px solid lightgray;
+    border-radius: 5px;
+}
+
 .main{
     display:flex;
     flex-direction: row;
@@ -33,13 +40,11 @@ header{
 .projectsContainer{
     display:flex;
     flex-direction: column;
-    width:300px;
+    width:250px;
     overflow-x: hidden;
     transition:.5s;
-    max-width: 300px;
     background-color: lightgray;
     padding:1rem;
-    
 }
 
 .projectsContainer h1{
@@ -54,7 +59,6 @@ header{
 
 .project,.addProject{
     display: flex;
-    justify-content: space-between;
     padding:.2rem;
     user-select: none;
     border-radius: 6px;
@@ -182,12 +186,10 @@ header{
 .details{
     display: grid;
     grid-template-columns: 1fr 1fr;
-    padding:.5rem;
-    
-}
-
-.hide{
-    display:none;
+    padding:0rem;
+    transition:.3s;
+    height:0px;
+    overflow-y: hidden;
 }
 
 .wide{
@@ -221,6 +223,7 @@ header{
     transform: translate(-50%,-50%);
     -ms-transform: translate(-50%,-50%);
     background-color: white;
+    padding:1rem;
 }
 
 #formTop{
@@ -249,7 +252,6 @@ header{
 .col{
     display:flex;
     flex-direction: column;
-    width:45%;
 }
 
 #formContainer input{
@@ -277,6 +279,20 @@ textarea{
     justify-content: flex-end;
 }
 
+.formButton{
+    margin:1rem;
+}
+
+.input{
+    display:grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 1rem;
+}
+
+i{
+    margin-right: 1rem;
+}
+
 @media screen and (max-width:800px){
     .projectsContainer{
         width:0px;
@@ -286,5 +302,9 @@ textarea{
         left:0;
         max-width: 220px;
         height:100%;
+    }
+    .input{
+        display:flex;
+        flex-direction: column;
     }
 }
