@@ -2,7 +2,7 @@
 
 > ## From The Odin Project's [curriculum](https://www.theodinproject.com/courses/javascript/lessons/todo-list)
 
-> - [live demo](https://hwd-swd.github.io/restaurant-page2/) :shipit:
+> - [live demo](https://hwd-swd.github.io/todo-list/) :shipit:
 
 ## Assignment
 > Create a dynamic todo list using JavaScript
