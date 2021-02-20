@@ -4,31 +4,38 @@
     font-size:100%;
     outline: 0;
     padding:0;
-    font-weight: lighter;
     font-family: sans-serif;
 }
 
 header{
     display:flex;
     flex-direction: row;
+    justify-content: space-between;
     align-items: center;
-    background-color: rgba(39, 36, 36, 0.8);
+    background-color: rgba(39, 36, 36, 1);
     padding:auto;
     height:4rem;
     color: white;
 }
 
-.title{
-    font-size:250%;
-    user-select: none;
-    margin:1rem;
-}
-
 #menuButton{
     font-size: 200%;
-    margin-left:1rem;
-    border: 1px solid lightgray;
-    border-radius: 5px;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-self: center;
+    padding:0rem 1rem;
+}
+
+#menuButton:active{
+    background-color: black;
+    color:white;
+}
+
+#menuButton:hover{
+    background-color: white;
+    color: black;
 }
 
 .main{
@@ -54,7 +61,7 @@ header{
 
 .active{
     background-color: darkgray;
-    font-weight: 900;
+    font-weight: bold;
 }
 
 .project,.addProject{
@@ -64,9 +71,7 @@ header{
     border-radius: 6px;
     margin:.2rem;
     transition: .3s;
-}
-
-.project h2{
+    font-weight: lighter;
     width:90%;
 }
 
@@ -89,7 +94,7 @@ header{
     display:flex;
     flex-direction: column;
     justify-content: left;
-    width: 100%;
+    width: 90%;
     max-width: 1200px;
     margin: 0 auto;
 }
@@ -113,13 +118,19 @@ header{
     justify-content: center;
     background-color: gray;
     font-size:200%;
-    border-radius: 6px;
-    width:40%;
-    max-width: 300px;
+    border-radius: 50%;
+    margin:1rem;
+    height:2rem;
+    width:2rem;
 }
 
-.todoList{
-    
+.addTask:hover{
+    background-color: white;
+    color:black;
+}
+
+.addTask:active{
+    box-shadow: 0px 0px 3px 5px gray;
 }
 
 .mainContainer{
@@ -149,6 +160,9 @@ header{
     flex-direction: row;
     justify-content: space-between;
     padding:.3rem;
+    border-bottom: #f8f8f8 1px solid;
+    margin-bottom: .5rem;
+    
 }
 
 .taskContainer p{
@@ -170,17 +184,31 @@ header{
     display:flex;
     flex-direction: row;
     max-width: 210px;
-    width:40%;
+    width:45%;
     justify-content: space-around;
     align-items: center;
+}
+
+.taskEdit{
+    color:rgba(0,0,0,0.2);
 }
 
 .taskDelete{
     color:rgba(0,0,0,0);
 }
 
-.taskDelete:hover{
+.taskDelete:hover,.taskEdit:hover{
     color:rgba(0,0,0,1);
+}
+
+.priority{
+    color: rgba(0,0,0,0);
+    text-shadow: 0 0 3px #000;
+    color: white;
+}
+
+.checked{
+    color: yellow;
 }
 
 .details{
@@ -190,6 +218,8 @@ header{
     transition:.3s;
     height:0px;
     overflow-y: hidden;
+    border:none;
+    border-radius: 10px;
 }
 
 .wide{
@@ -231,6 +261,7 @@ header{
     flex-direction: row;
     justify-content: space-between;
     padding:1rem;
+    font-size: 150%;
 }
 
 .line{
@@ -247,6 +278,7 @@ header{
     display:flex;
     flex-direction: row;
     justify-content: space-between;
+    align-items: center;
 }
 
 .col{
@@ -257,10 +289,6 @@ header{
 #formContainer input{
     border: 1px solid gray;
     border-radius: 3px;
-}
-
-#title{
-
 }
 
 textarea{
@@ -280,7 +308,7 @@ textarea{
 }
 
 .formButton{
-    margin:1rem;
+    
 }
 
 .input{
@@ -290,21 +318,59 @@ textarea{
 }
 
 i{
-    margin-right: 1rem;
+    margin: 0rem 1rem;
+}
+
+#close{
+    cursor: pointer;
+}
+
+#close:hover{
+    text-shadow: 0 0 5px gray;
+}
+
+.button{
+    background-color: gray;
+    margin:0.5rem 1rem;
+    padding:.5rem;
+    color: white;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.button:hover{
+    color: black;
+    background-color: white;
+}
+
+#submit{
+    background-color: green;
+}
+
+#clearForm{
+    background-color: red;
 }
 
 @media screen and (max-width:800px){
     .projectsContainer{
-        width:0px;
-        padding:0px;
         position: fixed;
         top:4rem;
         left:0;
         max-width: 220px;
         height:100%;
     }
+    .header{
+        position: fixed;
+        width: 100%;
+    }
     .input{
         display:flex;
         flex-direction: column;
+    }
+    i{
+        margin: 0rem .1rem;
+    }
+    .mainContainer{
+        margin-top: 3rem;
     }
 }

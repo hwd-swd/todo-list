@@ -9,8 +9,10 @@
     <body>
         <div id="content">
             <header class="header">
-                <div id="menuButton""><i class="fas fa-bars"></i></div>
-                <h1 class="title">Todo List</h1>
+                <div id="menuButton"><i class="fas fa-bars"></i></div>
+                <div class='addTask'>
+                            <h3>+</h3>
+                        </div>
             </header>
             <div class='main'>
                 <div class='projectsContainer'>
@@ -18,7 +20,7 @@
                         <h2 class="project"><i class="fas fa-inbox"></i>Inbox</h2>
                         <h2 class="project"><i class="fas fa-calendar-day"></i>Today</h2>
                     </div>
-                    <h1><i class="fas fa-tasks"></i>Projects</h1>
+                    <h1>Projects</h1>
                     <div class="customProjects">
                         
                     </div>
@@ -26,8 +28,8 @@
                     <form class="addProjectForm">
                         <input type="text" id="projectTitle" name="projectTitle" placeholder="Enter project title" required>
                         <div class="row">
-                            <button type="button" id="cancelProject">Cancel</button>
-                            <button type="button" id="submitProject">Add</button>
+                            <h2 id="cancelProject" class="button">Cancel</h2>
+                            <h2 id="submitProject" class="button">Add</h2>
                         </div>
                     </form>
                 </div>
@@ -35,9 +37,6 @@
                     <div class='todoMain'>
                     <div class='todoHeader'>
                         <h2 class='todoTitle'>Inbox</h1>
-                        <div class='addTask'>
-                            <h3>+</h3>
-                        </div>
                     </div>
                     
                     <div class='todoList'>
@@ -45,7 +44,7 @@
 
                     <div id="overlay">
                         <div id="form">
-                            <div id="formTop"><h2>Add a Task:</h2><button type="button" id="close">X</button></div>
+                            <div id="formTop"><h2>Add a Task:</h2><h2 id="close">X</h2></div>
                             <hr class="line">
                             <form id="formContainer">
                                 <div class="input">
@@ -65,8 +64,10 @@
                                     
                                     
                                     <div class="priorityInput col">
-                                        <label for="priority">Priority:</label>
-                                        <input type="checkbox" id="priority" name="priority">
+                                        <div style="display:flex">
+                                            <label for="priority">Priority:</label>
+                                            <input type="checkbox" id="priority" name="priority">
+                                        </div>
                                         
                                         <label for="project">Project:</label>
                                         <form class="projectSelector">
@@ -80,8 +81,8 @@
                                 </div>
                                                                
                                 <div id="formBottom">
-                                    <button type="button" class='formButton' id="clearForm">Clear</button>
-                                    <button type="button" class='formButton' id="submit">Submit</button>
+                                    <h2 class='button' id="clearForm">Clear</h2>
+                                    <h2 class='button' id="submit">Submit</h2>
                                 </div>
                                 
                                

@@ -113,21 +113,6 @@ let displayTasks=function(project){
                 
             };
         });
-    
-        
-
-        //displays the active project
-        const projects = document.querySelectorAll('.project');
-        projects.forEach(ele=>{
-            if(ele.textContent==project){
-                ele.classList.add('active');
-            }
-            else{
-                ele.classList.remove('active');
-            };
-        });
-
-        updateStorage(todoList);
     }else if(todoList.hasProject(project)){
         clearTasks();
         let header = document.querySelector('.todoTitle');
@@ -139,20 +124,20 @@ let displayTasks=function(project){
             let task = todoList.projects[index].tasks[i];
             todoListDOM.appendChild(displayTask(task,project,i));
         }
-
-        //displays the active project
-        const projects = document.querySelectorAll('.project');
-        projects.forEach(ele=>{
-            if(ele.textContent==project){
-                ele.classList.add('active');
-            }
-            else{
-                ele.classList.remove('active');
-            };
-        });
-
-        updateStorage(todoList);
+        
     };
+    //displays the active project
+    const projects = document.querySelectorAll('.project');
+    projects.forEach(ele=>{
+        if(ele.textContent==project){
+            ele.classList.add('active');
+            
+        }
+        else{
+            ele.classList.remove('active');
+        };
+    });
+    updateStorage(todoList);
 };
 
 //creates a new task to display
@@ -210,23 +195,32 @@ let displayTask=function(task,project,i){
     temp.appendChild(taskRight);
 
     //edit button for task
-    let editButton = document.createElement('button');
-    editButton.setAttribute('type','button');
+    let editButton = document.createElement('i');
+    editButton.classList.add('fas');
+    editButton.classList.add('fa-edit');
+    editButton.classList.add('taskEdit');
+    // editButton.setAttribute('class','button');
     editButton.setAttribute('value',i);
     editButton.setAttribute('project',project);
-    editButton.textContent='EDIT';
+
     editButton.addEventListener('click',openEdit);
     taskRight.appendChild(editButton);
 
 
     //toggle for task priority
-    let priorityCheck = document.createElement('input');
-    priorityCheck.setAttribute('type','checkbox');
+    // let priorityCheck = document.createElement('input');
+    let priorityCheck = document.createElement('i');
+    priorityCheck.classList.add('fas');
+    priorityCheck.classList.add('fa-star');
+    priorityCheck.classList.add('priority');
+
+    // priorityCheck.setAttribute('type','checkbox');
     priorityCheck.setAttribute('value',i);
     priorityCheck.setAttribute('project',project);
 
     if(task.priority==true){
-        priorityCheck.setAttribute('checked',true);
+        priorityCheck.classList.add('checked');
+        // priorityCheck.setAttribute('checked',true);
     }
     taskRight.appendChild(priorityCheck);
     priorityCheck.addEventListener('click',togglePriority);
@@ -263,9 +257,11 @@ let toggleDetails = function(e){
     if(detail.style.height=='50px'){
         detail.style.height='0px';
         detail.style.padding='0px';
+        detail.style.border='0px solid #f8f8f8';
     }else{
         detail.style.height='50px';
         detail.style.padding='.5rem';
+        detail.style.border='1px solid #f8f8f8';
     }
 };
 
@@ -301,8 +297,8 @@ let openEdit = function(e){
     overlayProjects();
 
     let taskIndex = e.target.getAttribute('value');
-    let projectTitle = e.target.getAttribute('project');
-    
+    let projectTitle = e.target.getAttribute('project');   
+
     const task = todoList.getTask(taskIndex,projectTitle);
 
     overlay.style.display = 'block';
@@ -419,10 +415,12 @@ let displayProjects=function(){
 let displayProject = function(project){
     
     let temp = document.createElement('div');
-    temp.setAttribute('class','project');
+    temp.setAttribute('class','row');
+    // temp.setAttribute('class','project');
 
     let header = document.createElement('h2');
     header.textContent= project.projectName;
+    header.setAttribute('class','project');
     temp.appendChild(header);
 
     let projectButton = document.createElement('p');
